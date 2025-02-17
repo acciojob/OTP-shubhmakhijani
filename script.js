@@ -1,23 +1,22 @@
-//your JS code here. If required.
-document.addEventListener('DOMContentLoaded', () => {
-    const inputs = document.querySelectorAll('.code');
+// Select all OTP input fields
+const otpInputs = document.querySelectorAll('.code');
 
-    inputs.forEach((input, index) => {
-        input.addEventListener('input', (event) => {
-            if (event.target.value) {
-                if (index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-            }
-        });
-
-        input.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace' && !input.value && index > 0) {
-                inputs[index - 1].focus();
-            }
-        });
+// Add event listeners to handle input and backspace behavior
+otpInputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+        // When the user types, move to the next field
+        if (input.value && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+        }
     });
 
-    // Automatically focus on the first input when the page loads
-    inputs[0].focus();
+    input.addEventListener('keydown', (e) => {
+        // Handle backspace behavior
+        if (e.key === 'Backspace' && !input.value && index > 0) {
+            otpInputs[index - 1].focus();
+        }
+    });
 });
+
+// Auto focus on the first input field when the page loads
+document.getElementById('code-1').focus();
